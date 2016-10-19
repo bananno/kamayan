@@ -1,0 +1,12 @@
+
+rvm use 2.3.1
+
+git fetch upstream
+
+git merge upstream/master
+
+C-x C-s ?
+C-x C-c
+
+
+attestify serving_02_array_lists.rb
