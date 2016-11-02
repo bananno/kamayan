@@ -23,18 +23,62 @@ class LinkedList
   # prepend the argument to the beginning of this LinkedList and increase the
   # size by 1. The return value must be self.
 
+  def >> (value)
+    @head = Node.new(value, @head)
+    @size += 1
+    return self
+  end
+
   # Define a method "<<" which takes a single argument. This method should
   # append the argument to the end of this LinkedList and increase the size by
   # 1. The return value must be self.
+
+  def << (value)
+
+    new_node = Node.new(value)
+
+    if @size == 0
+      @head = new_node
+    else
+      this_node = @head
+
+      (@size - 1).times do |i|
+        this_node = this_node.child
+      end
+
+      this_node.child = new_node
+    end
+
+    @size += 1
+
+    return self
+  end
 
   # Define a "delete" method which takes a single index argument. This method
   # should delete the value at the provided index and return it. The size should
   # be 1 less than it was before this method was called. The index must be
   # within the bounds of the LinkedList, or an IndexError should be raised.
 
+  def delete (index)
+    check_bounds(index)
+    @size -= 1
+  end
+
   # Define a method "[]" which takes a single index argument. This method should
   # retrieve the value at the given index. The index must be within the bounds
   # of the LinkedList, or an IndexError should be raised.
+
+  def [] (index)
+    check_bounds(index)
+
+    this_node = @head
+
+    index.times do |i|
+      this_node = this_node.child
+    end
+
+    return this_node.value
+  end
 
   # Define a method "[]=" which takes 2 arguments. This method should set the
   # value at the index defined in the first argument such that
@@ -49,6 +93,10 @@ class LinkedList
   # The size after this method is called depends on the index provided. An
   # existing index would not affect the size, but an index greater than the last
   # index will add the difference to the size.
+
+  def []= (index, value)
+    check_lower_bound(index)
+  end
 
   private
 

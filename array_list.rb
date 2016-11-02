@@ -29,15 +29,15 @@ class ArrayList
   # size by 1. The return value must be self.
 
   def >>(new_item)
+    @size += 1
+
     upsize
 
-    @size.times do |i|
-      @array[@size] = @array[@size - 1]
+    @size.downto(1) do |i|
+      @array[i] = @array[i - 1]
     end
 
     @array[0] = new_item
-
-    @size += 1
   end
 
   # Define a "delete" method which takes a single index argument. This method
@@ -46,7 +46,11 @@ class ArrayList
   # within the bounds of the ArrayList, or an IndexError should be raised.
 
   def delete(index)
+    check_bounds index
+
     temp = 0
+
+    deleted_value = @array[index]
 
     @size -= 1
 
@@ -63,6 +67,8 @@ class ArrayList
     end
 
     @array[@size] = nil
+
+    return deleted_value
   end
 
   # Define a method "[]=" which takes 2 arguments. This method should set the
@@ -82,6 +88,14 @@ class ArrayList
   # index will add the difference to the size.
 
   def []=(index, new_value)
+    check_lower_bound index
+
+    while @size <= index
+      @size += 1
+      upsize
+    end
+
+    @array[index] = new_value
   end
 
 

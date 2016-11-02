@@ -5,8 +5,14 @@ git fetch upstream
 
 git merge upstream/master
 
-C-x C-s ?
+C-x C-s
 C-x C-c
 
 
-attestify serving_02_array_lists.rb
+attestify serving_03_linked_lists.rb
+
+
+
+
+
+./console

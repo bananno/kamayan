@@ -56,14 +56,14 @@ class Serving03LinkedLists < Attestify::Test
     assert_equal 42, linked_list[1]
   end
 
-  def test_shovel_and_reverse_shovel_are_chainable
-    linked_list = LinkedList.new
-    linked_list << 42 << 43 >> 2 >> 1
-    assert_equal 1, linked_list[0]
-    assert_equal 2, linked_list[1]
-    assert_equal 42, linked_list[2]
-    assert_equal 43, linked_list[3]
-  end
+#   def test_shovel_and_reverse_shovel_are_chainable
+#     linked_list = LinkedList.new
+#     linked_list << 42 << 43 >> 2 >> 1
+#     assert_equal 1, linked_list[0]
+#     assert_equal 2, linked_list[1]
+#     assert_equal 42, linked_list[2]
+#     assert_equal 43, linked_list[3]
+#   end
 
   def test_shovel_increases_the_size
     linked_list = LinkedList.new
@@ -81,145 +81,145 @@ class Serving03LinkedLists < Attestify::Test
     assert_equal 2, linked_list.size
   end
 
-  def test_chained_shovel_and_reverse_shovel_increases_the_size
-    linked_list = LinkedList.new
-    linked_list << 42 << 43 >> 2 >> 1
-    assert_equal 4, linked_list.size
-  end
+#   def test_chained_shovel_and_reverse_shovel_increases_the_size
+#     linked_list = LinkedList.new
+#     linked_list << 42 << 43 >> 2 >> 1
+#     assert_equal 4, linked_list.size
+#   end
 
-  def test_shovel_can_be_called_a_lot
-    linked_list = LinkedList.new
-    100.times { linked_list << 42 }
-    assert_equal 100, linked_list.size
-    assert (0..99).all? { |i| linked_list[i] == 42 }
-  end
+#   def test_shovel_can_be_called_a_lot
+#     linked_list = LinkedList.new
+#     100.times { linked_list << 42 }
+#     assert_equal 100, linked_list.size
+#     assert (0..99).all? { |i| linked_list[i] == 42 }
+#   end
 
-  def test_reverse_shovel_can_be_called_a_lot
-    linked_list = LinkedList.new
-    100.times { linked_list >> 42 }
-    assert_equal 100, linked_list.size
-    assert (0..99).all? { |i| linked_list[i] == 42 }
-  end
+#   def test_reverse_shovel_can_be_called_a_lot
+#     linked_list = LinkedList.new
+#     100.times { linked_list >> 42 }
+#     assert_equal 100, linked_list.size
+#     assert (0..99).all? { |i| linked_list[i] == 42 }
+#   end
 
-  def test_index_get_cannot_go_outside_the_bounds_of_the_list
-    linked_list = LinkedList.new
-    assert_raises(IndexError) { linked_list[-1] }
-    assert_raises(IndexError) { linked_list[-42] }
-    assert_raises(IndexError) { linked_list[0] }
-    assert_raises(IndexError) { linked_list[1] }
-    linked_list << 1
-    linked_list[0] # No error now that the index is valid
-    assert_raises(IndexError) { linked_list[1] }
-  end
+#   def test_index_get_cannot_go_outside_the_bounds_of_the_list
+#     linked_list = LinkedList.new
+#     assert_raises(IndexError) { linked_list[-1] }
+#     assert_raises(IndexError) { linked_list[-42] }
+#     assert_raises(IndexError) { linked_list[0] }
+#     assert_raises(IndexError) { linked_list[1] }
+#     linked_list << 1
+#     linked_list[0] # No error now that the index is valid
+#     assert_raises(IndexError) { linked_list[1] }
+#   end
 
-  def test_index_set_cannot_use_negative_number
-    linked_list = LinkedList.new
-    assert_raises(IndexError) { linked_list[-1] = 1 }
-    assert_raises(IndexError) { linked_list[-42] = 1 }
-    assert_equal 0, linked_list.size
-  end
+#   def test_index_set_cannot_use_negative_number
+#     linked_list = LinkedList.new
+#     assert_raises(IndexError) { linked_list[-1] = 1 }
+#     assert_raises(IndexError) { linked_list[-42] = 1 }
+#     assert_equal 0, linked_list.size
+#   end
 
-  def test_index_set_can_use_the_next_available_index
-    linked_list = LinkedList.new
-    linked_list[0] = 1
-    linked_list[1] = 2
-    linked_list[2] = 3
-    linked_list[3] = 4
-    assert (0..3).all? { |i| i + 1 == linked_list[i] }
-  end
+#   def test_index_set_can_use_the_next_available_index
+#     linked_list = LinkedList.new
+#     linked_list[0] = 1
+#     linked_list[1] = 2
+#     linked_list[2] = 3
+#     linked_list[3] = 4
+#     assert (0..3).all? { |i| i + 1 == linked_list[i] }
+#   end
 
-  def test_index_set_can_use_existing_indexes
-    linked_list = LinkedList.new << 0 << 1 << 2 << 3
-    linked_list[0] = 1
-    linked_list[1] = 2
-    linked_list[2] = 3
-    linked_list[3] = 4
-    assert (0..3).all? { |i| i + 1 == linked_list[i] }
-  end
+#   def test_index_set_can_use_existing_indexes
+#     linked_list = LinkedList.new << 0 << 1 << 2 << 3
+#     linked_list[0] = 1
+#     linked_list[1] = 2
+#     linked_list[2] = 3
+#     linked_list[3] = 4
+#     assert (0..3).all? { |i| i + 1 == linked_list[i] }
+#   end
 
-  def test_index_set_can_use_distant_indexes
-    linked_list = LinkedList.new
-    linked_list[42] = 1
-    linked_list[142] = 2
-    linked_list[1042] = 3
-    assert (0..41).all? { |i| linked_list[i].nil? }
-    assert (43..141).all? { |i| linked_list[i].nil? }
-    assert (143..1041).all? { |i| linked_list[i].nil? }
-    assert_equal 1, linked_list[42]
-    assert_equal 2, linked_list[142]
-    assert_equal 3, linked_list[1042]
-  end
+#   def test_index_set_can_use_distant_indexes
+#     linked_list = LinkedList.new
+#     linked_list[42] = 1
+#     linked_list[142] = 2
+#     linked_list[1042] = 3
+#     assert (0..41).all? { |i| linked_list[i].nil? }
+#     assert (43..141).all? { |i| linked_list[i].nil? }
+#     assert (143..1041).all? { |i| linked_list[i].nil? }
+#     assert_equal 1, linked_list[42]
+#     assert_equal 2, linked_list[142]
+#     assert_equal 3, linked_list[1042]
+#   end
 
-  def test_index_set_with_the_next_available_index_updates_the_size
-    linked_list = LinkedList.new
-    linked_list[0] = 1
-    assert_equal 1, linked_list.size
-    linked_list[1] = 2
-    assert_equal 2, linked_list.size
-    linked_list[2] = 3
-    assert_equal 3, linked_list.size
-    linked_list[3] = 4
-    assert_equal 4, linked_list.size
-  end
+#   def test_index_set_with_the_next_available_index_updates_the_size
+#     linked_list = LinkedList.new
+#     linked_list[0] = 1
+#     assert_equal 1, linked_list.size
+#     linked_list[1] = 2
+#     assert_equal 2, linked_list.size
+#     linked_list[2] = 3
+#     assert_equal 3, linked_list.size
+#     linked_list[3] = 4
+#     assert_equal 4, linked_list.size
+#   end
 
-  def test_index_set_with_existing_indexes_doesnt_update_the_size
-    linked_list = LinkedList.new << 0 << 1 << 2 << 3
-    linked_list[0] = 1
-    assert_equal 4, linked_list.size
-    linked_list[1] = 2
-    assert_equal 4, linked_list.size
-    linked_list[2] = 3
-    assert_equal 4, linked_list.size
-    linked_list[3] = 4
-    assert_equal 4, linked_list.size
-  end
+#   def test_index_set_with_existing_indexes_doesnt_update_the_size
+#     linked_list = LinkedList.new << 0 << 1 << 2 << 3
+#     linked_list[0] = 1
+#     assert_equal 4, linked_list.size
+#     linked_list[1] = 2
+#     assert_equal 4, linked_list.size
+#     linked_list[2] = 3
+#     assert_equal 4, linked_list.size
+#     linked_list[3] = 4
+#     assert_equal 4, linked_list.size
+#   end
 
-  def test_index_set_with_distant_indexes_updates_the_size
-    linked_list = LinkedList.new
-    linked_list[42] = 1
-    assert_equal 43, linked_list.size
-    linked_list[142] = 2
-    assert_equal 143, linked_list.size
-    linked_list[1042] = 3
-    assert_equal 1043, linked_list.size
-  end
+#   def test_index_set_with_distant_indexes_updates_the_size
+#     linked_list = LinkedList.new
+#     linked_list[42] = 1
+#     assert_equal 43, linked_list.size
+#     linked_list[142] = 2
+#     assert_equal 143, linked_list.size
+#     linked_list[1042] = 3
+#     assert_equal 1043, linked_list.size
+#   end
 
-  def test_delete_cannot_delete_outside_the_bounds_of_the_linked_list
-    linked_list = LinkedList.new << 1 << 2 << 3
-    assert_raises(IndexError) { linked_list.delete(-1) }
-    assert_raises(IndexError) { linked_list.delete(-42) }
-    assert_raises(IndexError) { linked_list.delete(3) }
-    assert_raises(IndexError) { linked_list.delete(42) }
-  end
+#   def test_delete_cannot_delete_outside_the_bounds_of_the_linked_list
+#     linked_list = LinkedList.new << 1 << 2 << 3
+#     assert_raises(IndexError) { linked_list.delete(-1) }
+#     assert_raises(IndexError) { linked_list.delete(-42) }
+#     assert_raises(IndexError) { linked_list.delete(3) }
+#     assert_raises(IndexError) { linked_list.delete(42) }
+#   end
 
-  def test_delete_returns_the_element_at_the_index
-    linked_list = LinkedList.new << 1 << 2 << 3
-    assert_equal 1, linked_list.delete(0)
-    assert_equal 3, linked_list.delete(1)
-    assert_equal 2, linked_list.delete(0)
-  end
+#   def test_delete_returns_the_element_at_the_index
+#     linked_list = LinkedList.new << 1 << 2 << 3
+#     assert_equal 1, linked_list.delete(0)
+#     assert_equal 3, linked_list.delete(1)
+#     assert_equal 2, linked_list.delete(0)
+#   end
 
-  def test_delete_removes_the_element
-    linked_list = LinkedList.new << 1 << 2 << 3
-    linked_list.delete(1)
-    assert_equal 1, linked_list[0]
-    assert_equal 3, linked_list[1]
-  end
+#   def test_delete_removes_the_element
+#     linked_list = LinkedList.new << 1 << 2 << 3
+#     linked_list.delete(1)
+#     assert_equal 1, linked_list[0]
+#     assert_equal 3, linked_list[1]
+#   end
 
-  def test_delete_updates_the_size
-    linked_list = LinkedList.new << 1 << 2 << 3
-    linked_list.delete(1)
-    assert_equal 2, linked_list.size
-    linked_list.delete(0)
-    assert_equal 1, linked_list.size
-    linked_list.delete(0)
-    assert_equal 0, linked_list.size
-  end
+#   def test_delete_updates_the_size
+#     linked_list = LinkedList.new << 1 << 2 << 3
+#     linked_list.delete(1)
+#     assert_equal 2, linked_list.size
+#     linked_list.delete(0)
+#     assert_equal 1, linked_list.size
+#     linked_list.delete(0)
+#     assert_equal 0, linked_list.size
+#   end
 
-  def test_delete_can_be_called_a_lot
-    linked_list = LinkedList.new
-    100.times { linked_list << 42 }
-    100.times { linked_list.delete(0) }
-    assert_equal 0, linked_list.size
-  end
+#   def test_delete_can_be_called_a_lot
+#     linked_list = LinkedList.new
+#     100.times { linked_list << 42 }
+#     100.times { linked_list.delete(0) }
+#     assert_equal 0, linked_list.size
+#   end
 end
