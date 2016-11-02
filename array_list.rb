@@ -22,6 +22,8 @@ class ArrayList
     @array[@size] = new_item
 
     @size += 1
+
+    return self
   end
 
   # Define a method ">>" which takes a single argument. This method should
@@ -38,6 +40,8 @@ class ArrayList
     end
 
     @array[0] = new_item
+
+    return self
   end
 
   # Define a "delete" method which takes a single index argument. This method
