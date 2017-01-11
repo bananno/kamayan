@@ -21,13 +21,37 @@ class Stack
   # should be raised before adding the value if the stack is already at the
   # capacity.
 
+  def push(value)
+    if @max_size != nil && @max_size == size
+      raise StackOverflowError
+    end
+    @list << value
+    return self
+  end
+
   # Define a method "pop" which takes no arguments. This method should remove
   # and return the last value in the stack. An IndexError should be raised if
   # the Stack is empty.
 
+  def pop
+    if empty?
+      raise IndexError
+    end
+    return @list.delete_last
+  end
+
   # Define a method "empty?" which takes no arguments. This method should return
   # whether or not the size is 0.
 
+  def empty?
+    return size == 0
+  end
+
   # Define a method "peek" which takes no arguments. This method should return
   # the last value in the stack, without removing any elements in the stack.
+
+  def peek
+    return @list.last
+  end
+
 end

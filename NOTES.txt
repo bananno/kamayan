@@ -1,6 +1,8 @@
 
 rvm use 2.3.1
 
+git remote -v
+
 git fetch upstream
 
 git merge upstream/master
@@ -9,7 +11,7 @@ C-x C-s
 C-x C-c
 
 
-attestify serving_03_linked_lists.rb
+attestify course_01_collections/serving_05_stacks.rb
 
 
 

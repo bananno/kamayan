@@ -62,6 +62,26 @@ class LinkedList
   def delete (index)
     check_bounds(index)
     @size -= 1
+
+    this_node = @head
+
+    if index == 0
+      return_value = @head.value
+
+      @head = @head.child
+
+      return return_value
+    else
+      (index - 1).times do |i|
+        this_node = this_node.child
+      end
+
+      return_value = this_node.child.value
+
+      this_node.child = this_node.child.child
+
+      return return_value
+    end
   end
 
   # Define a method "[]" which takes a single index argument. This method should
@@ -96,6 +116,18 @@ class LinkedList
 
   def []= (index, value)
     check_lower_bound(index)
+
+    while @size <= index
+      self << nil
+    end
+
+    this_node = @head
+
+    index.times do |i|
+      this_node = this_node.child
+    end
+
+    this_node.value = value
   end
 
   private
