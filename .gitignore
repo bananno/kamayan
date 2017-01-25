@@ -1,1 +1,3 @@
-.bundle
+java/target
+javascript/node_modules
+ruby/.bundle
