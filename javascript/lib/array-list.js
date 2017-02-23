@@ -21,9 +21,25 @@ ArrayList.prototype.get = function(index) {
 // append the argument to the end of this ArrayList and increase the size by
 // 1. The return value must be this.
 
+ArrayList.prototype.add = function(value) {
+    this._increaseSizeIfNeeded();
+    this._array.set(this._size, value);
+    this._size += 1;
+    return this;
+};
+
 // Define a method "prepend" which takes a single argument. This method should
 // prepend the argument to the beginning of this ArrayList and increase the size
 // by 1. The return value must be this.
+
+ArrayList.prototype.prepend = function(value) {
+    if (!this._increaseSizeIfNeeded(1)) {
+        this._shiftValues();
+    }
+    this._array.set(0, value);
+    this._size += 1;
+    return this;
+};
 
 // Define a "delete" method which takes a single index argument. This method
 // should delete the value at the provided index and return it. The size should
@@ -48,6 +64,41 @@ ArrayList.prototype.get = function(index) {
 //
 // This method should return the value that was previously in the given index,
 // or null if that does not apply.
+
+ArrayList.prototype.set = function(index, value) {
+    this._checkLowerBound(index);
+
+    if (this._size <= index) {
+        this._size = index + 1;
+        this._increaseSizeIfNeeded();
+    }
+
+    var returnValue = this._array.get(index);
+
+    this._array.set(index, value);
+
+    return returnValue;
+}
+
+
+ArrayList.prototype._increaseSizeIfNeeded = function(shift = 0) {
+    if (this._size >= this._array.size()) {
+        var tempArray = this._array;
+        this._array = new FixedArray(this._size * 2);
+        for (var i=0; i<tempArray.size(); i++) {
+            this._array.set(i + shift, tempArray.get(i));
+        }
+        return true;
+    }
+    return false;
+}
+
+ArrayList.prototype._shiftValues = function() {
+    for(var i = this._size - 1; i >= 0; i -= 1) {
+        var tempValue = this._array.get(i);
+        this._array.set(i + 1, tempValue);
+    }
+};
 
 ArrayList.prototype._checkBounds = function(index) {
     this._checkLowerBound(index);
