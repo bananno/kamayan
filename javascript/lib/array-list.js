@@ -46,6 +46,22 @@ ArrayList.prototype.prepend = function(value) {
 // be 1 less than it was before this method was called. The index must be within
 // the bounds of the ArrayList, or an IndexError should be thrown.
 
+ArrayList.prototype.delete = function(index) {
+    this._checkBounds(index);
+
+    var deletedValue = this._array.get(index);
+
+    this._size -= 1;
+
+    for (var i=index; i<this._size; i++) {
+        this._array.set(i, this._array.get(i + 1));
+    }
+
+    this._array.set(this._size, null);
+
+    return deletedValue;
+}
+
 // Define a method "set" which takes 2 arguments. This method should set the
 // value at the index defined in the first argument such that list.get(index)
 // will return the second argument.

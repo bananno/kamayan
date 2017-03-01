@@ -27,7 +27,7 @@
 //   list.size() == 9
 //
 //   +---+---+---+---+---+---+---+---+---+---+
-//   | a | b | c | d | e | f | g | h | i |   |
+//   | a | b | c | d | e | f | g | h | j | j |
 //   +---+---+---+---+---+---+---+---+---+---+
 //
 //
@@ -222,13 +222,13 @@ test("set returns null if the previous value was null", function() {
     assert.isNull(list.set(0, 42));
 });
 
-test.skip("set returns null if the index is beyond the current size", function() {
+test("set returns null if the index is beyond the current size", function() {
     var list = new ArrayList();
     assert.isNull(list.set(0, 42));
     assert.isNull(list.set(42, 43));
 });
 
-test.skip("set returns the previous value", function() {
+test("set returns the previous value", function() {
     var list = new ArrayList().add(1).add(2).add(3);
     assert.equal(list.set(0, 42), 1);
     assert.equal(list.set(0, 43), 42);
@@ -236,11 +236,11 @@ test.skip("set returns the previous value", function() {
     assert.equal(list.set(2, 45), 3);
 });
 
-test.skip("delete exists", function() {
+test("delete exists", function() {
     assert.methodExists(ArrayList, "delete", 1);
 });
 
-test.skip("delete cannot delete outside the bounds of the array list", function() {
+test("delete cannot delete outside the bounds of the array list", function() {
     var list = new ArrayList().add(1).add(2).add(3);
     assert.throws(() => { list.delete(-1); }, IndexError);
     assert.throws(() => { list.delete(-42); }, IndexError);
@@ -248,14 +248,14 @@ test.skip("delete cannot delete outside the bounds of the array list", function(
     assert.throws(() => { list.delete(42); }, IndexError);
 });
 
-test.skip("delete removes the element", function() {
+test("delete removes the element", function() {
     var list = new ArrayList().add(1).add(2).add(3);
     list.delete(1);
     assert.equal(list.get(0), 1);
     assert.equal(list.get(1), 3);
 });
 
-test.skip("delete updates the size", function() {
+test("delete updates the size", function() {
     var list = new ArrayList().add(1).add(2).add(3);
     list.delete(1);
     assert.equal(list.size(), 2);
@@ -265,21 +265,21 @@ test.skip("delete updates the size", function() {
     assert.equal(list.size(), 0);
 });
 
-test.skip("delete returns the element at the index", function() {
+test("delete returns the element at the index", function() {
     var list = new ArrayList().add(1).add(2).add(3);
     assert.equal(list.delete(0), 1);
     assert.equal(list.delete(1), 3);
     assert.equal(list.delete(0), 2);
 });
 
-test.skip("delete can be called a lot", function() {
+test("delete can be called a lot", function() {
     var list = new ArrayList();
     Kamayan.times(100, () => { list.add(42); });
     Kamayan.times(100, () => { list.delete(0); });
     assert.equal(list.size(), 0);
 });
 
-test.skip("delete can delete from a full array", function() {
+test("delete can delete from a full array", function() {
     var list = new ArrayList();
     var internalArray = list._array;
     list._size = internalArray.size();
@@ -288,7 +288,7 @@ test.skip("delete can delete from a full array", function() {
     assert.equal(list.size(), 9);
 });
 
-test.skip("delete doesnt leave deleted elements in the array", function() {
+test("delete doesnt leave deleted elements in the array", function() {
     var list = new ArrayList();
     var internalArray = list._array;
     list._size = internalArray.size();
