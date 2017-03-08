@@ -21,19 +21,19 @@ public class ArrayList {
     }
 
     public ArrayList add(Object value) {
-        throw Kamayan.todo(
-            "The add(Object) method should append the argument to the end of",
-            "this ArrayList and increase the size by 1. The return value must",
-            "be this."
-        );
+        array[size] = value;
+        size++;
+        return this;
     }
 
     public ArrayList prepend(Object value) {
-        throw Kamayan.todo(
-            "The prepend(Object) method should prepend the argument to the",
-            "beginning of this ArrayList and increase the size by 1. The",
-            "return value must be this."
-        );
+        // throw Kamayan.todo(
+        //     "The prepend(Object) method should prepend the argument to the",
+        //     "beginning of this ArrayList and increase the size by 1. The",
+        //     "return value must be this."
+        // );
+        size++;
+        return this;
     }
 
     public Object delete(int index) {
