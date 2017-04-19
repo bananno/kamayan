@@ -27,11 +27,9 @@ public class ArrayList {
     }
 
     public ArrayList prepend(Object value) {
-        // throw Kamayan.todo(
-        //     "The prepend(Object) method should prepend the argument to the",
-        //     "beginning of this ArrayList and increase the size by 1. The",
-        //     "return value must be this."
-        // );
+        // The prepend(Object) method should prepend the argument to the
+        // beginning of this ArrayList and increase the size by 1. The
+        // return value must be this.
         size++;
         return this;
     }

@@ -1,6 +1,7 @@
 package com.on_site.kamayan.collections;
 
 import com.on_site.kamayan.Kamayan;
+import java.util.function.Consumer;
 
 public class LinkedList {
     private Node head;
@@ -34,60 +35,95 @@ public class LinkedList {
     }
 
     public LinkedList prepend(Object value) {
-        throw Kamayan.todo(
-            "The prepend(Object) method should prepend the argument to the",
-            "beginning of this LinkedList and increase the size by 1. The",
-            "return value must be this."
-        );
+        head = new Node(value, head);
+        size++;
+        return this;
     }
 
     public LinkedList add(Object value) {
-        throw Kamayan.todo(
-            "The add(Object) method should append the argument to the end of",
-            "this LinkedList and increase the size by 1. The return value must",
-            "be this."
-        );
+        Node newNode = new Node(value);
+
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node tempNode = head;
+            while (tempNode.child != null) {
+                tempNode = tempNode.child;
+            }
+            tempNode.child = newNode;
+        }
+
+        size++;
+
+        return this;
     }
 
     public Object delete(int index) {
-        throw Kamayan.todo(
-            "The delete(int) method should delete the value at the provided",
-            "index and return it. The size should be 1 less than it was before",
-            "this method was called. The index must be within the bounds of the",
-            "LinkedList, or an IndexOutOfBoundsException should be thrown."
-        );
+        checkBounds(index);
+
+        if (index == 0) {
+            Node deletedNode = head;
+            if (head.child == null) {
+                head = null;
+            } else {
+                head = head.child;
+            }
+            size--;
+            return deletedNode.value;
+        }
+
+        Node parentNode = goToNodeNumber(index - 1);
+
+        Object deletedValue = parentNode.child.value;
+
+        if (parentNode.child.child == null) {
+            parentNode.child = null;
+        } else {
+            parentNode.child = parentNode.child.child;
+        }
+
+        size--;
+
+        return deletedValue;
     }
 
     public Object get(int index) {
-        throw Kamayan.todo(
-            "The get(int) method should retrieve the value at the given index.",
-            "The index must be within the bounds of the LinkedList, or an",
-            "IndexOutOfBoundsException should be thrown."
-        );
+        checkBounds(index);
+        return goToNodeNumber(index).value;
     }
 
     public Object set(int index, Object value) {
-        throw Kamayan.todo(
-            "The set(int, Object) method should set the value at the index",
-            "defined in the first argument such that list.get(index) will",
-            "return the second argument.",
-            "",
-            "If the index is negative, an IndexOutOfBoundsException should be",
-            "thrown.",
-            "",
-            "If the index is bigger than the current size of the linked list,",
-            "the links should be adjusted to fit the new index. All indexes",
-            "between the former last element and the new index should be",
-            "initialized with null.",
-            "",
-            "The size after this method is called depends on the index",
-            "provided. An existing index would not affect the size, but an",
-            "index greater than the last index will add the difference to the",
-            "size.",
-            "",
-            "This method should return the value that was previously in the",
-            "given index, or null if that does not apply."
-        );
+        checkLowerBound(index);
+
+        if (size == 0) {
+            head = new Node(null);
+            size++;
+        }
+
+        Node tempNode = head;
+
+        for (int count = 0; count < index; count++) {
+            if (tempNode.child == null) {
+                tempNode.child = new Node(null);
+                size++;
+            }
+            tempNode = tempNode.child;
+        }
+
+        Object oldValue = tempNode.value;
+        tempNode.value = value;
+
+        return oldValue;
+    }
+
+    private Node goToNodeNumber(int index) {
+        Node tempNode = head;
+
+        for (int count = 0; count < index; count++) {
+            tempNode = tempNode.child;
+        }
+
+        return tempNode;
     }
 
     private void checkBounds(int index) {

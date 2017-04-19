@@ -1,4 +1,6 @@
 
+git remote add upstream git@github:ownerOfRepo/repoName
+
 rvm use 2.3.1
 
 git remote -v
