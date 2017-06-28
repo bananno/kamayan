@@ -3,9 +3,12 @@ package com.on_site.kamayan;
 import com.google.common.base.Joiner;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class Kamayan {
     private Kamayan() {}
@@ -62,6 +65,55 @@ public class Kamayan {
 
             return getDeclaredField(clazz, fieldName);
         }
+    }
+
+    public static <T> T send(Object object, Class<T> expectedReturnType, String methodName, Object... params) {
+        try {
+            Method method = getMethod(object.getClass(), methodName, params);
+            return expectedReturnType.cast(method.invoke(object, params));
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Method getMethod(Class<?> type, String methodName, Object... params) throws NoSuchMethodException {
+        Class<?>[] paramTypes = Arrays.stream(params).map(Object::getClass).collect(Collectors.toList()).toArray(new Class<?>[0]);
+
+        try {
+            return type.getMethod(methodName, paramTypes);
+        } catch (NoSuchMethodException e) {
+            Method[] methods = type.getMethods();
+
+            for (Method method : methods) {
+                if (methodMatches(method, methodName, paramTypes)) {
+                    return method;
+                }
+            }
+
+            throw e;
+        }
+    }
+
+    private static boolean methodMatches(Method method, String name, Class<?>... paramTypes) {
+        if (!method.getName().equals(name)) {
+            return false;
+        }
+
+        Class<?>[] expectedTypes = method.getParameterTypes();
+
+        if (expectedTypes.length != paramTypes.length) {
+            return false;
+        }
+
+        for (int i = 0; i < paramTypes.length; i++) {
+            if (!expectedTypes[i].isAssignableFrom(paramTypes[i])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static void times(int n, Consumer<Integer> fn) {
