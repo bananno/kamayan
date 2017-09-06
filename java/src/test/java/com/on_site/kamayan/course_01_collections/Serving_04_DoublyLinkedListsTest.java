@@ -379,7 +379,7 @@ public class Serving_04_DoublyLinkedListsTest extends TestCase {
         new DoublyLinkedList().each((element) -> fail("Expected no yield!"));
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void eachYieldsToTheElementsInOrder() {
         DoublyLinkedList list = new DoublyLinkedList().add(1).add(2).add(42).add(43);
@@ -388,7 +388,7 @@ public class Serving_04_DoublyLinkedListsTest extends TestCase {
         assertEquals(Arrays.asList(1, 2, 42, 43), actualElements);
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void eachReturnsThisSoItCanBeChained() {
         DoublyLinkedList list = new DoublyLinkedList();
@@ -398,13 +398,13 @@ public class Serving_04_DoublyLinkedListsTest extends TestCase {
         assertEquals(list, list.each((element) -> { }));
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void eachReversedYieldsToNothingWhenTheListIsEmpty() {
         new DoublyLinkedList().eachReversed((element) -> fail("Expected no yield!"));
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void eachReversedYieldsToTheElementsInReverseOrder() {
         DoublyLinkedList list = new DoublyLinkedList().add(1).add(2).add(42).add(43);
@@ -413,7 +413,7 @@ public class Serving_04_DoublyLinkedListsTest extends TestCase {
         assertEquals(Arrays.asList(43, 42, 2, 1), actualElements);
     }
 
-    @Ignore("Remove this line to run this test")
+    // @Ignore("Remove this line to run this test")
     @Test
     public void eachReversedReturnsThisSoItCanBeChained() {
         DoublyLinkedList list = new DoublyLinkedList();

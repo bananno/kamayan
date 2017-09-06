@@ -104,17 +104,21 @@ public class DoublyLinkedList {
     }
 
     public DoublyLinkedList each(Consumer<Object> block) {
-        for (int i = 0; i < size; i++) {
+        Node tempNode = head;
+        while (tempNode != null) {
+            block.accept(tempNode.value);
+            tempNode = tempNode.child;
         }
         return this;
     }
 
     public DoublyLinkedList eachReversed(Consumer<Object> block) {
-        throw Kamayan.todo(
-            "The eachReversed(Consumer) method yields to the consumer with each",
-            "element in the list, in reverse order. The return value must be",
-            "this."
-        );
+        Node tempNode = tail;
+        while (tempNode != null) {
+            block.accept(tempNode.value);
+            tempNode = tempNode.previous;
+        }
+        return this;
     }
 
     private void checkBounds(int index) {
