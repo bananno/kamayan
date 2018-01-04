@@ -34,13 +34,22 @@ public class Hash {
     }
 
     public Hash put(Object key, Object value) {
-        throw Kamayan.todo(
-        );
+        if (key == null) {
+            throw new NullPointerException("");
+        }
+        this.size += 1;
+        return this;
     }
 
     public Object get(Object key) {
-        throw Kamayan.todo(
-        );
+        int keyHash = key.hashCode();
+        int index = keyHash % this.hash.length;
+        DoublyLinkedList list = hash[index];
+        if (list == null) {
+            throw new MissingKeyException("");
+        }
+        Entry entry = (Entry) list.first();
+        return entry.getValue();
     }
 
     public boolean contains(Object key) {
