@@ -4,7 +4,7 @@ import com.on_site.kamayan.Kamayan;
 
 import java.util.function.Consumer;
 
-public class TreeSet<T extends Comparable<?>> {
+public class TreeSet<T extends Comparable<T>> {
     private int size = 0;
     private Node root;
 
@@ -23,18 +23,35 @@ public class TreeSet<T extends Comparable<?>> {
     }
 
     public TreeSet<T> add(T object) {
-        throw Kamayan.todo(
-        );
+        Node tempNode = new Node(object);
+        if (size == 0) {
+            root = tempNode;
+            size += 1;
+        } else {
+            int comparison = root.value.compareTo(object);
+            if (comparison == -1) {
+                root.left = tempNode;
+                size += 1;
+            } else if (comparison == 1) {
+                root.right = tempNode;
+                size += 1;
+            }
+        }
+        return this;
     }
 
     public TreeSet<T> remove(T object) {
-        throw Kamayan.todo(
-        );
+        return this;
     }
 
     public boolean contains(T object) {
-        throw Kamayan.todo(
-        );
+        if (size == 0) {
+            return false;
+        }
+        if (root.value.compareTo(object) == 0) {
+            return true;
+        }
+        return false;
     }
 
     public TreeSet<T> each(Consumer<T> block) {

@@ -69,7 +69,6 @@ public class Serving_07_HashesTest extends TestCase {
         assertThrows(MissingKeyException.class, () -> hash.get("abc"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void getWithExistingKeyReturnsTheValueStored() throws Exception {
         Hash hash = new Hash().put("abc", 42).put("xyz", 123);
@@ -77,7 +76,6 @@ public class Serving_07_HashesTest extends TestCase {
         assertEquals(123, hash.get("xyz"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void getAfterPutReturnsNewValue() throws Exception {
         Hash hash = new Hash().put("abc", 42);
@@ -86,7 +84,6 @@ public class Serving_07_HashesTest extends TestCase {
         assertEquals(123, hash.get("abc"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void putWithSameKeyDoesntIncreaseSize() throws Exception {
         Hash hash = new Hash();
@@ -97,7 +94,6 @@ public class Serving_07_HashesTest extends TestCase {
         assertEquals(1, hash.size());
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void putWithDifferentKeyButEqualsIsTrueDoesntIncreaseSize() throws Exception {
         Hash hash = new Hash();
@@ -107,7 +103,6 @@ public class Serving_07_HashesTest extends TestCase {
         assertEquals(1, hash.size());
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void getForDifferentKeysButSameHashCodeReturnsCorrectValue() throws Exception {
         Key key1 = new Key("abc", 1);
@@ -117,7 +112,6 @@ public class Serving_07_HashesTest extends TestCase {
         assertEquals(123, hash.get(key2));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void getForDifferentKeysButEqualsIsTrueReturnsTheSameValue() throws Exception {
         Hash hash = new Hash().put(new Key("abc", 1), 42);
@@ -136,21 +130,18 @@ public class Serving_07_HashesTest extends TestCase {
         Kamayan.times(1000, (i) -> assertEquals(i, hash.get("key" + i)));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsReturnsFalseForEmptyHash() throws Exception {
         Hash hash = new Hash();
         assertFalse(hash.contains("abc"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsReturnsFalseForMissingKeys() throws Exception {
         Hash hash = new Hash().put("abc", 42);
         assertFalse(hash.contains("xyz"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsReturnsTrueForExistingKeys() throws Exception {
         Hash hash = new Hash().put("abc", 42).put("xyz", 123);
@@ -158,7 +149,6 @@ public class Serving_07_HashesTest extends TestCase {
         assertTrue(hash.contains("xyz"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsReturnsCorrectlyForDifferentKeysWithSameHashButNotEqual() throws Exception {
         Key key1 = new Key("abc", 1);
@@ -168,7 +158,6 @@ public class Serving_07_HashesTest extends TestCase {
         assertFalse(hash.contains(key2));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsReturnsTrueForDifferentKeysWhenEqualsIsTrue() throws Exception {
         Hash hash = new Hash().put(new Key("abc", 1), 42);

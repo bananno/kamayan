@@ -11,14 +11,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class Serving_08_TreeSetTest extends TestCase {
-    @Ignore("Remove this line to run this test")
+
     @Test
     public void addReturnsSelf() {
         TreeSet<Integer> set = new TreeSet<>();
         assertEquals(set, set.add(42));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void addIncreasesTheSize() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -27,7 +26,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(1, set.size());
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void addDoesntIncreaseTheSizeIfTheValueIsAlreadyThere() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -37,7 +35,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(1, set.size());
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void addTheFirstElementGoesToTheRoot() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -45,7 +42,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(42, Kamayan.getField(set, Integer.class, "root", "value"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void addDoesntInsertADuplicateNode() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -95,14 +91,12 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertNull(Kamayan.getField(set, Object.class, "root", "right", "right"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsWithAnEmptyTreeReturnsFalse() {
         TreeSet<Integer> set = new TreeSet<>();
         assertFalse(set.contains(42));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsReturnsTrueWhereTheRootEqualsTheValue() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -153,7 +147,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         set.remove(42);
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeReturnsItself() {
         TreeSet<Integer> set = new TreeSet<>();

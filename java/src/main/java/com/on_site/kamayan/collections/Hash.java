@@ -39,11 +39,11 @@ public class Hash {
     }
 
     public Hash put(Object key, Object value) {
-        //throw Kamayan.todo(
-        //);
         if (key == null) {
             throw new NullPointerException("Key cannot be null!");
         }
+
+        resizeIfNeeded();
 
         int index = hashedIndex(key);
         DoublyLinkedList list = hash[index];
@@ -66,8 +66,6 @@ public class Hash {
     }
 
     public Object get(Object key) {
-        //throw Kamayan.todo(
-        //);
         int index = hashedIndex(key);
         DoublyLinkedList list = hash[index];
 
@@ -85,6 +83,10 @@ public class Hash {
     }
 
     private Entry find(DoublyLinkedList list, Object key) {
+        if (list == null) {
+            return null;
+        }
+
         Ref<Entry> entry = new Ref<>();
 
         list.each((element) -> {
@@ -98,12 +100,33 @@ public class Hash {
         return entry.get();
     }
 
+    private void resizeIfNeeded() {
+        int threshold = (int) (hash.length * 0.75);
+        if (size() + 1 <= threshold) {
+            return;
+        }
+
+        DoublyLinkedList[] oldHash = this.hash;
+        this.hash = new DoublyLinkedList[oldHash.length * 2];
+
+        for (DoublyLinkedList list : oldHash) {
+            if (list == null) {
+                continue;
+            }
+            list.each((object) -> {
+                Entry entry = (Entry) object;
+                put(entry.key, entry.value);
+            });
+        }
+    }
+
     private int hashedIndex(Object key) {
         return key.hashCode() % hash.length;
     }
 
     public boolean contains(Object key) {
-        throw Kamayan.todo(
-        );
+        int index = hashedIndex(key);
+        Entry entry = find(hash[index], key);
+        return entry != null;
     }
 }
