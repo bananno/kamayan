@@ -51,7 +51,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertNull(Kamayan.getField(set, Object.class, "root", "right"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void addASmallerObjectAddsToTheLeft() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -60,7 +59,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(13, Kamayan.getField(set, Integer.class, "root", "left", "value"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void addALargerObjectAddsToTheRight() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -69,7 +67,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(84, Kamayan.getField(set, Integer.class, "root", "right", "value"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void addDoesntInsertADuplicateNodeThatIsToTheLeftOfTheRoot() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -80,7 +77,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertNull(Kamayan.getField(set, Object.class, "root", "left", "right"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void addDoesntInsertADuplicateNodeThatIsToTheRightOfTheRoot() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -108,7 +104,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertTrue(set.contains(42));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsReturnsFalseWhereTheValueIsNotInTheTree() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -120,7 +115,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertFalse(set.contains(7));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsWhereTheValueIsOnTheLeftBranch() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -130,7 +124,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertTrue(set.contains(13));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void containsWhereTheValueIsOnTheRightBranch() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -140,7 +133,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertTrue(set.contains(84));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeDoesNothingWhenTheTreeIsEmpty() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -153,7 +145,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(set, set.remove(42));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeDecreasesTheSizeIfTheValueIsThere() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -163,7 +154,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(0, set.size());
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeDoesntDecreaseTheSizeIfTheValueIsNotThere() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -173,7 +163,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(1, set.size());
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeWithOneElementRemovesTheRoot() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -183,7 +172,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertNull(Kamayan.getField(set, Object.class, "root"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeTheRootWhenThereIsOnlyALeftSubtree() {
         TreeSet<Integer> set = new TreeSet<>();

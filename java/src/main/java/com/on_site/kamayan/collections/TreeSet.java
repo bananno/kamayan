@@ -23,34 +23,67 @@ public class TreeSet<T extends Comparable<T>> {
     }
 
     public TreeSet<T> add(T object) {
-        Node tempNode = new Node(object);
+        Node newNode = new Node(object);
+
         if (size == 0) {
-            root = tempNode;
+            root = newNode;
             size += 1;
-        } else {
-            int comparison = root.value.compareTo(object);
-            if (comparison == -1) {
-                root.left = tempNode;
-                size += 1;
-            } else if (comparison == 1) {
-                root.right = tempNode;
-                size += 1;
+        } else if (!contains(object)) {
+
+            Node tempNode = root;
+
+            while (true) {
+                int comparison = tempNode.value.compareTo(object);
+
+                if (comparison > 0) {
+                    if (tempNode.left == null) {
+                        tempNode.left = newNode;
+                        break;
+                    }
+                    tempNode = tempNode.left;
+                } else if (comparison < 0) {
+                    if (tempNode.right == null) {
+                        tempNode.right = newNode;
+                        break;
+                    }
+                    tempNode = tempNode.right;
+                }
+            }
+
+            size += 1;
+        }
+
+        return this;
+    }
+
+    public TreeSet<T> remove(T object) {
+        if (contains(object)) {
+            size -= 1;
+            if (size == 0) {
+                root = null;
+            } else {
+                if (root.left != null && root.right == null) {
+                    root = root.left;
+                }
             }
         }
         return this;
     }
 
-    public TreeSet<T> remove(T object) {
-        return this;
-    }
-
     public boolean contains(T object) {
-        if (size == 0) {
-            return false;
+        Node tempNode = root;
+
+        while (tempNode != null) {
+            int comparison = tempNode.value.compareTo(object);
+            if (comparison == 0) {
+                return true;
+            } else if (comparison > 0) {
+                tempNode = tempNode.left;
+            } else {
+                tempNode = tempNode.right;
+            }
         }
-        if (root.value.compareTo(object) == 0) {
-            return true;
-        }
+
         return false;
     }
 
