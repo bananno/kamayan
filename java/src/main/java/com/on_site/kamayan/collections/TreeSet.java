@@ -29,16 +29,20 @@ public class TreeSet<T extends Comparable<T>> {
     }
 
     public TreeSet<T> remove(T object) {
-        if (contains(object)) {
-            size -= 1;
-            if (size == 0) {
-                root = null;
-            } else if (root.left != null && root.right == null) {
-                root = root.left;
-            } else if (root.left == null && root.right != null) {
-                root = root.right;
-            }
+        if (!contains(object)) {
+            return this;
         }
+
+        size -= 1;
+
+        if (size == 0) {
+            root = null;
+        } else if (root.left != null && root.right == null) {
+            root = root.left;
+        } else if (root.left == null && root.right != null) {
+            root = root.right;
+        }
+
         return this;
     }
 
