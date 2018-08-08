@@ -29,52 +29,35 @@ public class TreeSet<T extends Comparable<T>> {
     }
 
     public TreeSet<T> remove(T object) {
-        if (!contains(object)) {
-            return this;
-        }
-
-        size -= 1;
-
         if (size == 0) {
-            root = null;
-            return this;
-        } else if (root.left != null && root.right == null) {
-            root = root.left;
-            return this;
-        } else if (root.left == null && root.right != null) {
-            root = root.right;
             return this;
         }
 
-        if (size == 0) {
-            root = null;
-            return this;
-        }
-
-        Node tempParentNode = removeOneNode(object);
-
-        if (tempParentNode == null) {
+        if (root.value.compareTo(object) == 0) {
+            size -= 1;
             if (root.left != null) {
-                Node tempBranch = root.right;
+                Node tempRightBranch = root.right;
                 root = root.left;
-                if (tempBranch != null) {
-                    appendNode(tempBranch);
+                if (tempRightBranch != null) {
+                    appendNode(tempRightBranch);
                 }
-            } else if (root.right != null) {
+            } else {
                 root = root.right;
             }
             return this;
         }
 
-        // if (tempParentNode != null) {
-        //     if (tempParentNode.left != null) {
-        //         // appendNode(tempParentNode.left);
-        //     }
+        Node tempNode = findNode(object);
 
-        //     if (tempParentNode.right != null) {
-        //         // appendNode(tempParentNode.right);
-        //     }
-        // }
+        if (tempNode != null) {
+            Node tempRight = tempNode.right;
+            tempNode = null;
+            if (tempRight != null) {
+                appendNode(tempRight);
+            }
+            size -= 1;
+        }
+
 
         return this;
     }
@@ -101,32 +84,21 @@ public class TreeSet<T extends Comparable<T>> {
         );
     }
 
-    private Node removeOneNode(T object) {
-        Node parentNode = null;
+    private Node findNode(T object) {
         Node tempNode = root;
-        boolean left = false;
 
-        while (true) {
-
+        while (tempNode != null) {
             int comparison = tempNode.value.compareTo(object);
-
             if (comparison == 0) {
-                if (parentNode != null) {
-                    if (left) {
-                        parentNode.left = null;
-                    } else {
-                        parentNode.right = null;
-                    }
-                }
-                return parentNode;
+                return tempNode;
             } else if (comparison > 0) {
-                parentNode = tempNode;
                 tempNode = tempNode.left;
             } else {
-                parentNode = tempNode;
                 tempNode = tempNode.right;
             }
         }
+
+        return null;
     }
 
     private void appendNode(Node newNode) {
