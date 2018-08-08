@@ -37,11 +37,44 @@ public class TreeSet<T extends Comparable<T>> {
 
         if (size == 0) {
             root = null;
+            return this;
         } else if (root.left != null && root.right == null) {
             root = root.left;
+            return this;
         } else if (root.left == null && root.right != null) {
             root = root.right;
+            return this;
         }
+
+        if (size == 0) {
+            root = null;
+            return this;
+        }
+
+        Node tempParentNode = removeOneNode(object);
+
+        if (tempParentNode == null) {
+            if (root.left != null) {
+                Node tempBranch = root.right;
+                root = root.left;
+                if (tempBranch != null) {
+                    appendNode(tempBranch);
+                }
+            } else if (root.right != null) {
+                root = root.right;
+            }
+            return this;
+        }
+
+        // if (tempParentNode != null) {
+        //     if (tempParentNode.left != null) {
+        //         // appendNode(tempParentNode.left);
+        //     }
+
+        //     if (tempParentNode.right != null) {
+        //         // appendNode(tempParentNode.right);
+        //     }
+        // }
 
         return this;
     }
@@ -68,20 +101,32 @@ public class TreeSet<T extends Comparable<T>> {
         );
     }
 
-    private Node getParentNode(T object) { // use in remove
+    private Node removeOneNode(T object) {
+        Node parentNode = null;
         Node tempNode = root;
+        boolean left = false;
 
-        // while (true) {
-        //     if (tempNode == null) {
-        //         return tempNode;
-        //     }
+        while (true) {
 
-        //     int comparison = tempNode.value.compareTo(object);
+            int comparison = tempNode.value.compareTo(object);
 
-
-        // }
-
-        return tempNode;
+            if (comparison == 0) {
+                if (parentNode != null) {
+                    if (left) {
+                        parentNode.left = null;
+                    } else {
+                        parentNode.right = null;
+                    }
+                }
+                return parentNode;
+            } else if (comparison > 0) {
+                parentNode = tempNode;
+                tempNode = tempNode.left;
+            } else {
+                parentNode = tempNode;
+                tempNode = tempNode.right;
+            }
+        }
     }
 
     private void appendNode(Node newNode) {
