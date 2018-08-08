@@ -49,15 +49,18 @@ public class TreeSet<T extends Comparable<T>> {
 
         Node tempNode = findNode(object);
 
-        if (tempNode != null) {
-            Node tempRight = tempNode.right;
-            tempNode = null;
-            if (tempRight != null) {
-                appendNode(tempRight);
-            }
-            size -= 1;
+        if (tempNode == null) {
+            return this;
         }
 
+        Node tempRight = tempNode.right;
+        tempNode = null;
+
+        if (tempRight != null) {
+            appendNode(tempRight);
+        }
+
+        size -= 1;
 
         return this;
     }
