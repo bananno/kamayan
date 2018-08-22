@@ -51,22 +51,17 @@ public class TreeSet<T extends Comparable<T>> {
             if (root.left.value.compareTo(object) == 0) {
                 size -= 1;
 
-                if (root.left.left != null && root.left.right != null) {
-                    Node tempNode1 = root.left.left;
-                    Node tempNode2 = root.left.right;
-                    root.left = null;
-                    appendNode(tempNode1, false);
-                    appendNode(tempNode2, false);
-                } else if (root.left.left != null) {
-                    Node tempNode = root.left.left;
-                    root.left = null;
-                    appendNode(tempNode, false);
-                } else if (root.left.right != null) {
-                    Node tempNode = root.left.right;
-                    root.left = null;
-                    appendNode(tempNode, false);
-                } else {
-                    root.left = null;
+                Node tempLeftNode = root.left.left;
+                Node tempRightNode = root.left.right;
+
+                root.left = null;
+
+                if (tempLeftNode != null) {
+                    appendNode(tempLeftNode, false);
+                }
+
+                if (tempRightNode != null) {
+                    appendNode(tempRightNode, false);
                 }
 
                 return this;
