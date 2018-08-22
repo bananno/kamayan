@@ -68,6 +68,27 @@ public class TreeSet<T extends Comparable<T>> {
             }
         }
 
+        if (root.right != null) {
+            if (root.right.value.compareTo(object) == 0) {
+                size -= 1;
+
+                Node tempLeftNode = root.right.left;
+                Node tempRightNode = root.right.right;
+
+                root.right = null;
+
+                if (tempLeftNode != null) {
+                    appendNode(tempLeftNode, false);
+                }
+
+                if (tempRightNode != null) {
+                    appendNode(tempRightNode, false);
+                }
+
+                return this;
+            }
+        }
+
         return this;
     }
 
