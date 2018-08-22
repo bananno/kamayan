@@ -216,7 +216,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertNull(Kamayan.getField(set, Object.class, "root", "left"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeTheLeftNodeWhenThereIsOnlyALeftSubtree() {
         TreeSet<Integer> set = new TreeSet<>();
