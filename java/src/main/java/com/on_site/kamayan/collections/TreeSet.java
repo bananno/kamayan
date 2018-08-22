@@ -24,7 +24,7 @@ public class TreeSet<T extends Comparable<T>> {
 
     public TreeSet<T> add(T object) {
         Node newNode = new Node(object);
-        appendNode(newNode);
+        appendNode(newNode, true);
         return this;
     }
 
@@ -39,7 +39,7 @@ public class TreeSet<T extends Comparable<T>> {
                 Node tempRightBranch = root.right;
                 root = root.left;
                 if (tempRightBranch != null) {
-                    appendNode(tempRightBranch);
+                    appendNode(tempRightBranch, true);
                 }
             } else {
                 root = root.right;
@@ -47,20 +47,13 @@ public class TreeSet<T extends Comparable<T>> {
             return this;
         }
 
-        Node tempNode = findNode(object);
-
-        if (tempNode == null) {
-            return this;
+        if (root.left != null) {
+            if (root.left.value.compareTo(object) == 0) {
+                size -= 1;
+                root.left = null;
+                return this;
+            }
         }
-
-        Node tempRight = tempNode.right;
-        tempNode = null;
-
-        if (tempRight != null) {
-            appendNode(tempRight);
-        }
-
-        size -= 1;
 
         return this;
     }
@@ -104,10 +97,10 @@ public class TreeSet<T extends Comparable<T>> {
         return null;
     }
 
-    private void appendNode(Node newNode) {
+    private void appendNode(Node newNode, boolean increaseSize) {
         if (size == 0) {
             root = newNode;
-            size += 1;
+            size += increaseSize ? 1 : 0;
             return;
         }
 
@@ -122,14 +115,14 @@ public class TreeSet<T extends Comparable<T>> {
             } if (comparison > 0) {
                 if (tempNode.left == null) {
                     tempNode.left = newNode;
-                    size += 1;
+                    size += increaseSize ? 1 : 0;
                     return;
                 }
                 tempNode = tempNode.left;
             } else if (comparison < 0) {
                 if (tempNode.right == null) {
                     tempNode.right = newNode;
-                    size += 1;
+                    size += increaseSize ? 1 : 0;
                     return;
                 }
                 tempNode = tempNode.right;
