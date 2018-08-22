@@ -226,7 +226,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(subtree, Kamayan.getField(set, Object.class, "root", "left"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeTheLeftNodeWhenThereIsOnlyARightSubtree() {
         TreeSet<Integer> set = new TreeSet<>();
@@ -237,7 +236,6 @@ public class Serving_08_TreeSetTest extends TestCase {
         assertEquals(subtree, Kamayan.getField(set, Object.class, "root", "left"));
     }
 
-    @Ignore("Remove this line to run this test")
     @Test
     public void removeTheLeftNodeWhenThereIsALeftAndRightSubtree() {
         TreeSet<Integer> set = new TreeSet<>();
