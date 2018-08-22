@@ -33,6 +33,11 @@ public class TreeSet<T extends Comparable<T>> {
             return this;
         }
 
+        boolean madeChange = false;
+
+        Node tempLeftNode;
+        Node tempRightNode;
+
         if (root.value.compareTo(object) == 0) {
             size -= 1;
             if (root.left != null) {
@@ -44,15 +49,16 @@ public class TreeSet<T extends Comparable<T>> {
             } else {
                 root = root.right;
             }
-            return this;
+
+            madeChange = true;
         }
 
-        if (root.left != null) {
+        if (!madeChange && root.left != null) {
             if (root.left.value.compareTo(object) == 0) {
                 size -= 1;
 
-                Node tempLeftNode = root.left.left;
-                Node tempRightNode = root.left.right;
+                tempLeftNode = root.left.left;
+                tempRightNode = root.left.right;
 
                 root.left = null;
 
@@ -64,16 +70,16 @@ public class TreeSet<T extends Comparable<T>> {
                     appendNode(tempRightNode, false);
                 }
 
-                return this;
+                madeChange = true;
             }
         }
 
-        if (root.right != null) {
+        if (!madeChange && root.right != null) {
             if (root.right.value.compareTo(object) == 0) {
                 size -= 1;
 
-                Node tempLeftNode = root.right.left;
-                Node tempRightNode = root.right.right;
+                tempLeftNode = root.right.left;
+                tempRightNode = root.right.right;
 
                 root.right = null;
 
@@ -85,7 +91,7 @@ public class TreeSet<T extends Comparable<T>> {
                     appendNode(tempRightNode, false);
                 }
 
-                return this;
+                madeChange = true;
             }
         }
 
